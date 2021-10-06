@@ -1,0 +1,1 @@
+Scripts for comparison of Selection sort, Insertion sort, Merge sort and Shellsort
