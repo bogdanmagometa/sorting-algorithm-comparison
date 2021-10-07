@@ -11,7 +11,7 @@ beeing invoked.
 """
 
 def insertion_sort(arr):
-    """In-place insertion sort"""
+    """In-place insertion sort. Return number of compares"""
     num_compares = 0
     def inc_compares():
         nonlocal num_compares
@@ -29,7 +29,7 @@ def insertion_sort(arr):
     return num_compares
 
 def selection_sort(arr):
-    """In-place selection sort"""
+    """In-place selection sort. Return number of compares"""
     num_compares = 0
 
     n = len(arr)
@@ -43,29 +43,29 @@ def selection_sort(arr):
     return num_compares
 
 def shellsort(arr):
-    """In-place shellsort"""
+    """In-place shellsort. Return number of compares"""
     num_compares = 0
     def inc_compares():
         nonlocal num_compares
         num_compares += 1
         return False
 
-    h = 1
-    while h < len(arr) / 3:
-        h = 3*h + 1
-    while h >= 1:
-        for i in range(h, len(arr)):
+    step = 1
+    while step < len(arr) / 3:
+        step = 3*step + 1
+    while step >= 1:
+        for i in range(step, len(arr)):
             j = i
             key = arr[j]
-            while j >= h and (inc_compares() or  arr[j-h] > key):
-                arr[j] = arr[j-h]
-                j -= h
+            while j >= step and (inc_compares() or  arr[j-step] > key):
+                arr[j] = arr[j-step]
+                j -= step
             arr[j] = key
-        h //= 3
+        step //= 3
     return num_compares
 
 def merge_sort(arr):
-    """In-place merge sort"""
+    """In-place merge sort. Return number of compares"""
     return _merge_sort(arr, 0, len(arr) - 1)
 
 def _merge_sort(arr, start: int, end: int):
