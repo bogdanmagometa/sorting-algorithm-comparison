@@ -6,6 +6,8 @@ The module contains implementation of the following sorting algorithms:
 2. selection_sort
 3. shell_sort
 4. merge_sort
+Each of the listed above functions returns number of compares made after
+beeing invoked.
 """
 
 def insertion_sort(arr):
@@ -29,22 +31,19 @@ def insertion_sort(arr):
 def selection_sort(arr):
     """In-place selection sort"""
     num_compares = 0
-    def inc_compares():
-        nonlocal num_compares
-        num_compares += 1
-        return False
 
     n = len(arr)
     for i in range(n-1):
         min = i
         for j in range(i+1, n):
-            if (inc_compares() or arr[j] < arr[min]):
+            num_compares += 1
+            if arr[j] < arr[min]:
                 min = j
         arr[i], arr[min] = arr[min], arr[i]
     return num_compares
 
-def shell_sort(arr):
-    """In-place shell sort"""
+def shellsort(arr):
+    """In-place shellsort"""
     num_compares = 0
     def inc_compares():
         nonlocal num_compares
@@ -88,7 +87,8 @@ def _merge(arr, start: int, mid: int, end: int):
     right.append(float('inf'))
     i, j = 0, 0
     for k in range(start, end+1):
-        num_compares += 1
+        if float('inf') not in [left[i], right[j]]:
+            num_compares += 1
         if left[i] <= right[j]:
             arr[k] = left[i]
             i += 1
@@ -102,6 +102,6 @@ if __name__ == "__main__":
     arr = [8, 1, 41, 1, 0, -1, 0]
     #insertion_sort(arr)
     #selection_sort(arr)
-    shell_sort(arr)
+    shellsort(arr)
     #merge_sort(arr)
     print(arr)
